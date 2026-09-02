@@ -34,12 +34,12 @@ def examine_desk(inventory, note_found, drawer_open):
     print("-" * 40)
 
     print(italic("\nYou examine the desk."))
-    print(italic("There is a small locked drawer."))
-    print(italic("Beside it, you find a note."))
+    print(italic("It's neatly organised. A note sits in the middle."))
     print(italic('The note reads: "The first number is hiding where time stands still."'))
+    print(italic("The desk has one drawer, which seems to be locked."))
 
     if "brass key" not in inventory and not drawer_open:
-        print(italic("You also notice a small brass key underneath the desk."))
+        print(italic("As you look around you notice a small brass key underneath the desk."))
         inventory.append("brass key")
         print(italic("You pick up the brass key."))
 
@@ -74,11 +74,20 @@ def examine_portrait():
 
     print(italic("\nYou examine the portrait."))
     print(italic(
-    "It shows an old man with his arm around a smiling, little girl.\n"
+    "It shows a young man, who looks like your boss in younger years, with his arm around a smiling, little girl.\n"
     "Around her neck is a gold locket with the name 'Nina' engraved on it.\n"
-    "The old man is looking behind them at a grandfather clock.\n"
+    "The man is looking behind them at a grandfather clock.\n"
     "The glass on the clock is cracked and the time reads 7.15."))
     return True
+
+def look_at_the_door():
+    print("\n" + "-" * 40)
+    print("THE DOOR".center(40))
+    print("-" * 40)
+
+    print(italic("\nYou look at the door.\n"
+                 "It looks old and rusty but the lock is secure.\n"
+                 "There's a 4-digit keypad on the wall next to the door."))
 
 def show_inventory(inventory): 
     print("\nInventory: ")
@@ -96,7 +105,12 @@ def main():
 
     name = input("What is your name? ").strip()
 
-    print(f"Hello, {name}!")
+    print(f"\nHello, {name}!")
+    print(italic("\nYour snooping around seems to have put you in a pickle.\n"
+                 "You were at your boss's dinner party at his old mansion\n"
+                 "and upon entering what seemed to be his office the door slammed shut behind you.\n"
+                 "The lock clicked and now the door won't budge.\n"
+                 "You can very faintly still hear the noise of the party where your boss is giving a toast."))
 
     first_number_found = False
     inventory = []
@@ -125,7 +139,7 @@ def main():
         elif choice == "Examine the bookshelf":
             print("You examine the bookshelf.")
         elif choice == "Look at the door":
-            print("You look at the door.")
+            look_at_the_door()
         elif choice == "Check inventory":
             show_inventory(inventory)
         elif choice == "Open the desk drawer":
