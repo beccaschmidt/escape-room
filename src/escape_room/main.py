@@ -16,6 +16,8 @@ def show_menu(inventory):
     for number, choice in enumerate(choices, start=1):
         print(f"{number}. {choice}")
 
+    return choices
+
 def examine_desk(inventory):
     print("\nYou examine the desk.")
     print("There is a small locked drawer.")
@@ -54,21 +56,31 @@ def main():
     drawer_open = False
 
     while True:
-        show_menu(inventory)
+        choices = show_menu(inventory)
 
         choice = input("> ").strip()
 
-        if choice == "1":
+        try:
+            choice_index = int(choice) - 1
+            choice = choices[choice_index]
+        except ValueError:
+            print("Please enter a number.")
+            continue
+        except IndexError:
+            print("Please choose one of the available options.")
+            continue
+
+        if choice == "Examine the desk":
             examine_desk(inventory)
-        elif choice == "2":
+        elif choice == "Examine the portrait":
             first_number_found = examine_portrait()
-        elif choice == "3":
+        elif choice == "Examine the bookshelf":
             print("You examine the bookshelf.")
-        elif choice == "4":
+        elif choice == "Look at the door":
             print("You look at the door.")
-        elif choice == "5":
+        elif choice == "Check inventory":
             show_inventory(inventory)
-        elif choice == "6":
+        elif choice == "Quit":
             print("Thanks for playing!")
             break
         else:
