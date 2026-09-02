@@ -1,4 +1,4 @@
-def show_menu(inventory):
+def show_menu(inventory, drawer_open):
     print()
 
     choices = [
@@ -10,7 +10,7 @@ def show_menu(inventory):
         "Quit"
     ]
 
-    if "brass key" in inventory:
+    if "brass key" in inventory and not drawer_open:
         choices.insert(-1, "Open the desk drawer")
 
     for number, choice in enumerate(choices, start=1):
@@ -28,6 +28,13 @@ def examine_desk(inventory):
         print("You also notice a small brass key underneath the desk.")
         inventory.append("brass key")
         print("You pick up the brass key.")
+
+def open_drawer(inventory):
+    print("\nYou use the brass key to unlock the drawer.")
+    print("The drawer is stiff, but after some wiggling, it creaks and opens.")
+    print("Inside, you find a small piece of paper.")
+    inventory.remove("brass key")
+    return True
 
 def examine_portrait():
     print("\nYou examine the portrait.")
@@ -56,7 +63,7 @@ def main():
     drawer_open = False
 
     while True:
-        choices = show_menu(inventory)
+        choices = show_menu(inventory, drawer_open)
 
         choice = input("> ").strip()
 
@@ -80,6 +87,8 @@ def main():
             print("You look at the door.")
         elif choice == "Check inventory":
             show_inventory(inventory)
+        elif choice == "Open the desk drawer":
+            drawer_open = open_drawer(inventory)
         elif choice == "Quit":
             print("Thanks for playing!")
             break
