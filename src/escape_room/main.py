@@ -5,7 +5,8 @@ def italic(text):
 def yellow(text):
     return f"\033[33m{text}\033[0m"
 
-def show_menu(inventory):
+
+def show_menu(inventory, drawer_open):
     print("\n" + "-" * 40)
     print("WHAT WOULD YOU LIKE TO DO?".center(40))
     print("-" * 40)
@@ -19,7 +20,7 @@ def show_menu(inventory):
         "Quit"
     ]
 
-    if "brass key" in inventory:
+    if "brass key" in inventory and not drawer_open:
         choices.insert(-1, "Open the desk drawer")
 
     for number, choice in enumerate(choices, start=1):
@@ -41,6 +42,18 @@ def examine_desk(inventory):
         print(italic("You also notice a small brass key underneath the desk."))
         inventory.append("brass key")
         print(italic("You pick up the brass key."))
+
+def open_drawer(inventory):
+    print("\n" + "-" * 40)
+    print("THE DESK DRAWER".center(40))
+    print("-" * 40)
+
+    print(italic("\nYou use the brass key to unlock the drawer."))
+    print(italic("The drawer is stiff, but after some wiggling, it creaks and opens."))
+    print(italic("Inside, you find a small piece of paper."))
+
+    inventory.remove("brass key")
+    return True
 
 def examine_portrait():
     print("\n" + "-" * 40)
@@ -75,7 +88,7 @@ def main():
     drawer_open = False
 
     while True:
-        choices = show_menu(inventory)
+        choices = show_menu(inventory, drawer_open)
 
         choice = input("> ").strip()
 
@@ -99,6 +112,8 @@ def main():
             print("You look at the door.")
         elif choice == "Check inventory":
             show_inventory(inventory)
+        elif choice == "Open the desk drawer":
+            drawer_open = open_drawer(inventory)
         elif choice == "Quit":
             print("Thanks for playing!")
             break
