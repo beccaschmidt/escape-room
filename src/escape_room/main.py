@@ -1,5 +1,15 @@
+def italic(text):
+    return f"\033[3m{text}\033[0m"
+
+
+def yellow(text):
+    return f"\033[33m{text}\033[0m"
+
+
 def show_menu(inventory, drawer_open):
-    print()
+    print("\n" + "-" * 40)
+    print("WHAT WOULD YOU LIKE TO DO?".center(40))
+    print("-" * 40)
 
     choices = [
         "Examine the desk",
@@ -14,32 +24,45 @@ def show_menu(inventory, drawer_open):
         choices.insert(-1, "Open the desk drawer")
 
     for number, choice in enumerate(choices, start=1):
-        print(f"{number}. {choice}")
+        print(yellow(f"{number}. {choice}"))
 
     return choices
 
 def examine_desk(inventory):
-    print("\nYou examine the desk.")
-    print("There is a small locked drawer.")
-    print("Beside it, you find a note.")
-    print('The note reads: "The first number is hiding where time stands still."')
+    print("\n" + "-" * 40)
+    print("THE DESK".center(40))
+    print("-" * 40)
+
+    print(italic("\nYou examine the desk."))
+    print(italic("There is a small locked drawer."))
+    print(italic("Beside it, you find a note."))
+    print(italic('The note reads: "The first number is hiding where time stands still."'))
 
     if "brass key" not in inventory: 
-        print("You also notice a small brass key underneath the desk.")
+        print(italic("You also notice a small brass key underneath the desk."))
         inventory.append("brass key")
-        print("You pick up the brass key.")
+        print(italic("You pick up the brass key."))
 
 def open_drawer(inventory):
-    print("\nYou use the brass key to unlock the drawer.")
-    print("The drawer is stiff, but after some wiggling, it creaks and opens.")
-    print("Inside, you find a small piece of paper.")
+    print("\n" + "-" * 40)
+    print("THE DESK DRAWER".center(40))
+    print("-" * 40)
+
+    print(italic("\nYou use the brass key to unlock the drawer."))
+    print(italic("The drawer is stiff, but after some wiggling, it creaks and opens."))
+    print(italic("Inside, you find a small piece of paper."))
+
     inventory.remove("brass key")
     return True
 
 def examine_portrait():
-    print("\nYou examine the portrait.")
-    print("It shows an old man and a little girl smiling beside a grandfather clock. "
-    "The glass on the clock is cracked and the time reads 7.15.")
+    print("\n" + "-" * 40)
+    print("THE PORTRAIT".center(40))
+    print("-" * 40)
+
+    print(italic("\nYou examine the portrait."))
+    print(italic("It shows an old man and a little girl smiling beside a grandfather clock. "
+                 "The glass on the clock is cracked and the time reads 7.15."))
     return True
 
 def show_inventory(inventory): 
@@ -52,7 +75,9 @@ def show_inventory(inventory):
         print("Your inventory is empty.")
 
 def main():
-    print("Welcome to the Escape Room!")
+    print("\n" + "-" * 40)
+    print("WELCOME TO THE ESCAPE ROOM!".center(40))
+    print("-" * 40)
 
     name = input("What is your name? ").strip()
 
