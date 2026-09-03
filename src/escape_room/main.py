@@ -96,6 +96,16 @@ def look_at_the_door():
                  "It looks old and rusty but the lock is secure.\n"
                  "There's a 4-digit keypad on the wall next to the door.")))
 
+    code = input(yellow("Enter the 4-digit code: ")).strip()
+    print()
+
+    if code == "7982":
+        print(cyan(italic("The keypad beeps. The lock clicks open.")))
+        print(cyan(italic("You push the door open and quickly step out of the office.")))
+        return True
+    else:
+        print(cyan(italic("The keypad beeps. The code is incorrect.")))
+
 def show_inventory(inventory): 
     print("\nInventory: ")
 
@@ -190,7 +200,9 @@ def main():
         elif choice == "Examine the bookshelf":
             examine_bookshelf()
         elif choice == "Look at the door":
-            look_at_the_door()
+            escaped = look_at_the_door()
+            if escaped:
+                break
         elif choice == "Check inventory":
             show_inventory(inventory)
         elif choice == "Open the desk drawer":
