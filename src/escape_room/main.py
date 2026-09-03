@@ -5,10 +5,13 @@ def italic(text):
 def yellow(text):
     return f"\033[33m{text}\033[0m"
 
+def cyan(text):
+    return f"\033[36m{text}\033[0m"
+
 
 def show_menu(inventory, drawer_open):
     print("\n" + "-" * 40)
-    print("WHAT WOULD YOU LIKE TO DO?".center(40))
+    print(yellow("WHAT WOULD YOU LIKE TO DO?".center(40)))
     print("-" * 40)
 
     choices = [
@@ -30,64 +33,62 @@ def show_menu(inventory, drawer_open):
 
 def examine_desk(inventory, note_found, drawer_open):
     print("\n" + "-" * 40)
-    print("THE DESK".center(40))
+    print(cyan("THE DESK".center(40)))
     print("-" * 40)
 
-    print(italic("\nYou examine the desk."))
-    print(italic("It's neatly organised. A note sits in the middle."))
-    print(italic('The note reads: "The first number is hiding where time stands still."'))
-    print(italic("The desk has one drawer, which seems to be locked."))
+    print(cyan(italic("\nYou examine the desk.")))
+    print(cyan(italic("It's neatly organised. A note sits in the middle.")))
+    print(cyan(italic('The note reads: "The first number is hiding where time stands still."')))
 
     if "brass key" not in inventory and not drawer_open:
-        print(italic("As you look around you notice a small brass key underneath the desk."))
+        print(cyan(italic("The desk has a small drawer which appears to be locked.\n")))
+        print(cyan(italic("As you look around you notice a small brass key underneath the desk.")))
         inventory.append("brass key")
-        print(italic("You pick up the brass key."))
+        print(cyan(italic("You pick up the brass key.")))
 
     if note_found:
-        print(italic("\nThe piece of paper you found in the drawer is now resting on the desk."))
-        print(italic("'Two stand beside the clock.\n"
+        print(cyan(italic("\nThe piece of paper you found in the drawer is now resting on the desk.")))
+        print(cyan(italic("'Two stand beside the clock.\n"
             "One tells you when.\n"
-            "The one who does not keep time\n"
-            "has a name worth remembering.'"))
+            "The other has a name worth remembering.'\n")))
 
 def open_drawer(inventory):
     print("\n" + "-" * 40)
-    print("THE DESK DRAWER".center(40))
+    print(cyan("THE DESK DRAWER".center(40)))
     print("-" * 40)
 
-    print(italic("\nYou use the brass key to unlock the drawer."))
-    print(italic("The drawer is stiff, but after some wiggling, it creaks and opens."))
-    print(italic("Inside, you find a small piece of paper."))
-    print(italic("The paper reads:"))
-    print(italic("'Two stand beside the clock.\n"
+    print(cyan(italic("\nYou use the brass key to unlock the drawer.")))
+    print(cyan(italic("The drawer is stiff, but after some wiggling, it creaks and opens.")))
+    print(cyan(italic("Inside, you find a small piece of paper.")))
+    print(cyan(italic("The paper reads:")))
+    print(cyan(italic("'Two stand beside the clock.\n"
     "One tells you when.\n"
-    "The one who does not keep time\n"
-    "has a name worth remembering.'"))
+    "The one has a name worth remembering.'\n")))
 
     inventory.remove("brass key")
     return True, True
 
 def examine_portrait():
     print("\n" + "-" * 40)
-    print("THE PORTRAIT".center(40))
+    print(cyan("THE PORTRAIT".center(40)))
     print("-" * 40)
 
-    print(italic("\nYou examine the portrait."))
-    print(italic(
+    print(cyan(italic("\nYou examine the portrait.")))
+    print(cyan(italic(
     "It shows a young man, who looks like your boss in younger years, with his arm around a smiling, little girl.\n"
     "Around her neck is a gold locket with the name 'Nina' engraved on it.\n"
     "The man is looking behind them at a grandfather clock.\n"
-    "The glass on the clock is cracked and the time reads 7.15."))
+    "The glass on the clock is cracked and the time reads 7.15.")))
     return True
 
 def look_at_the_door():
     print("\n" + "-" * 40)
-    print("THE DOOR".center(40))
+    print(cyan("THE DOOR".center(40)))
     print("-" * 40)
 
-    print(italic("\nYou look at the door.\n"
+    print(cyan(italic("\nYou look at the door.\n"
                  "It looks old and rusty but the lock is secure.\n"
-                 "There's a 4-digit keypad on the wall next to the door."))
+                 "There's a 4-digit keypad on the wall next to the door.")))
 
 def show_inventory(inventory): 
     print("\nInventory: ")
@@ -100,17 +101,17 @@ def show_inventory(inventory):
 
 def main():
     print("\n" + "-" * 40)
-    print("WELCOME TO THE ESCAPE ROOM!".center(40))
+    print(yellow("WELCOME TO THE ESCAPE ROOM!".center(40)))
     print("-" * 40)
 
-    name = input("What is your name? ").strip()
+    name = input(yellow("What is your name? ")).strip()
 
     print(f"\nHello, {name}!")
-    print(italic("\nYour snooping around seems to have put you in a pickle.\n"
+    print(cyan(italic("\nYour snooping around seems to have put you in a pickle.\n"
                  "You were at your boss's dinner party at his old mansion\n"
                  "and upon entering what seemed to be his office the door slammed shut behind you.\n"
                  "The lock clicked and now the door won't budge.\n"
-                 "You can very faintly still hear the noise of the party where your boss is giving a toast."))
+                 "You can very faintly still hear the noise of the party where your boss is giving a toast.")))
 
     first_number_found = False
     inventory = []
